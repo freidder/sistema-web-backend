@@ -1,0 +1,92 @@
+{
+  "info": {
+    "name": "Santander Construction API",
+    "description": "Colección para pruebas de proyectos y subida de archivos.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Login Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\":\"admin@dominio.com\",\"password\":\"Pass123!\"}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "auth", "login"]
+        }
+      }
+    },
+    {
+      "name": "Crear Proyecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"client\":\"Cliente Test\",\"address\":\"Calle 123\",\"sidingType\":\"Vinyl\",\"area\":100,\"price\":5000,\"status\":\"pending\",\"startDate\":\"2026-01-10T00:00:00Z\",\"notes\":\"Proyecto de prueba\"}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/projects",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "projects"]
+        }
+      }
+    },
+    {
+      "name": "Subir Foto a Proyecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "photo", "type": "file", "src": "C:/Users/freid/Documents/Sin título-2.png" }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/projects/{{projectId}}/photos",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "projects", "{{projectId}}", "photos"]
+        }
+      }
+    },
+    {
+      "name": "Consultar Proyecto",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/projects/{{projectId}}",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "projects", "{{projectId}}"]
+        }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "token", "value": "" },
+    { "key": "projectId", "value": "" }
+  ]
+}
